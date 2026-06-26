@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EVORA - Luxury Skincare Experience</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="hero-container">
+
+        <!-- EXPANDED FULL SCREEN SLIDESHOW BACKGROUND -->
+        <div class="slideshow-wrapper">
+            <!-- Slide 1 (Active by default) -->
+            <div class="slide active">
+                <img src="https://imageio.forbes.com/specials-images/imageserve/61e55d9990b901ab208fba2a/Happy-Woman-Applying-Cosmetic-Cream-On-Her-Face/0x0.jpg?width=960" alt="Pure Solution Essence Product View" class="slide-img">
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1728727267814-792db55ce678?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fG1pbmltYWwlMjBza2luY2FyZXxlbnwwfHwwfHx8MA%3D%3D" alt="Pure Solution Essence Product View" class="slide-img">
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1564141696939-9eb6e957ccfc?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmNhcmV8ZW58MHx8MHx8fDA%3D" alt="Skincare Texture Detail" class="slide-img">
+            </div>
+            <!-- Slide 4 -->
+            <div class="slide">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/070/881/880/small/minimal-skincare-set-productgraphy-on-bright-white-surface-photo.jpeg" alt="Pure Solution Essence Product View" class="slide-img">
+            </div>
+            <!-- Slide 5 -->
+            <div class="slide">
+                <img src="https://t3.ftcdn.net/jpg/02/72/37/20/360_F_272372012_2aOGqAOdrJaFmaqlkGCHSvlcL2wrLUDD.jpg" alt="Botanical Oils and Serums Assembly" class="slide-img">
+            </div>
+            <!-- Slide 6 -->
+            <div class="slide">
+                <img src="https://www.shutterstock.com/image-photo/beautiful-caucasian-woman-glowing-skin-260nw-2652858707.jpg" alt="Pure Solution Essence Product View" class="slide-img">
+            </div>
+        </div>
+
+        <!-- CENTERED TYPOGRAPHY OVERLAY -->
+        <div class="center-content-overlay">
+            <div class="brand-showcase">
+                <h1 class="brand-title">EVORA</h1>
+                <p class="brand-tagline">Your Skin. Your Hair. Your Glow.</p>
+                <!-- Update the button code on your MAIN slideshow page to look like this: -->
+                <a href="{% url 'register' %}" style="text-decoration: none;">
+                   <button class="register-action-btn">
+                               Register
+                   </button>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- DYNAMIC SLIDE PROGRESS INDICATORS (Auto-adjusts to 6 dots via JavaScript) -->
+        <div class="slideshow-indicators" id="dotsContainer"></div>
+
+    </main>
+
+    <!-- Enhanced Slideshow Control Script -->
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dotsContainer');
+        let currentSlideIndex = 0;
+        const slideDuration = 4000; // Transitions every 4 seconds
+
+        // Dynamically build indicator dots based on the total number of slides
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function changeSlide() {
+            // Remove active status from old elements
+            slides[currentSlideIndex].classList.remove('active');
+            dots[currentSlideIndex].classList.remove('active');
+
+            // Loop forward smoothly across all 6 slides
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+
+            // Apply active status to new elements
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        setInterval(changeSlide, slideDuration);
+    </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVORA - Login Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Core Layout Reset */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0d1412; /* Rich dark-slate baseline foundation */
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Full Screen Form Flex Layout Wrapper */
+        .form-overlay-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: radial-gradient(circle, rgba(13, 24, 21, 0.5) 0%, rgba(10, 14, 22, 0.9) 100__);
+        }
+
+        /* Minimal Luxury Login Card */
+        .login-form {
+            width: 100%;
+            max-width: 440px;
+            background: rgba(13, 20, 18, 0.4);
+            border: 1px solid rgba(229, 193, 179, 0.15); /* Delicate rose-gold tinted boundary frame */
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px); /* High-end glassmorphism frosted effect */
+            animation: loginEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Form Brand Aesthetics Block */
+        .form-brand-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .brand-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 10px;
+            color: #e5c1b3; /* Signature Soft Rose Gold */
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .brand-subtitle {
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #a3b8b0; /* Signature Muted Sage Green */
+            text-transform: uppercase;
+        }
+
+        /* Field Layout Box Elements */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .label-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .input-group label {
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a3b8b0;
+        }
+
+        .required {
+            color: #e5c1b3;
+            margin-left: 2px;
+        }
+
+        /* Inline Minimal Input Restyling */
+        .input-group input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(163, 184, 176, 0.3);
+            padding: 10px 0;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            outline: none;
+            transition: border-bottom-color 0.4s ease;
+        }
+
+        /* Input Focus Highlighting Active Animation */
+        .input-group input:focus {
+            border-bottom-color: #e5c1b3; /* Focus scales smoothly to Rose Gold */
+        }
+
+        /* Forgot Password Small Utility Link */
+        .forgot-password-link {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(163, 184, 176, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password-link:hover {
+            color: #e5c1b3;
+        }
+
+        /* Main Execution Submission Action Button */
+        .submit-btn {
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid #e5c1b3;
+            padding: 15px 0;
+            color: #e5c1b3;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #e5c1b3;
+            color: #0d1412; /* Color spectrum inversion on pointer hover */
+            box-shadow: 0 10px 30px rgba(229, 193, 179, 0.2);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.99);
+        }
+
+        /* ==========================================================================
+           CENTERED SIGN UP FOOTER REDIRECTION LINK
+           ========================================================================== */
+        .registration-redirect {
+            display: block;
+            width: 100%;
+            text-align: center; /* Absolutely anchors text to horizontal middle line */
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-top: 12px;
+            margin-bottom: 0;
+            color: #a3b8b0; /* Crisp Sage Green text visibility */
+        }
+
+        .registration-redirect a {
+            color: #e5c1b3; /* Elegant Rose Gold text selection link */
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 6px;
+            display: inline-block;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Micro-interaction underline flourish tracker loop */
+        .registration-redirect a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #e5c1b3;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .registration-redirect a:hover {
+            color: #ffffff; /* Fades the link color seamlessly to pure white on click hover */
+        }
+
+        .registration-redirect a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Smooth Form Entrance Transition */
+        @keyframes loginEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Compact Mobile Breakdowns */
+        @media (max-width: 480px) {
+            .login-form {
+                padding: 40px 24px;
+                gap: 24px;
+            }
+            .brand-title {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-overlay-container">
+    <form class="login-form" action="" method="post">
+        {% csrf_token %}
+
+        <!-- ALERTS DISPLAY BANNER: Dynamically handles the {'error': ...} context variable passed by views.py -->
+        {% if error %}
+            <p style="color: #ff4d4d; font-size: 13px; text-align: center; margin: 0 0 -10px 0; font-weight: 400; letter-spacing: 0.5px;">{{ error }}</p>
+        {% endif %}
+
+        <div class="form-brand-header">
+            <h1 class="brand-title">EVORA</h1>
+            <p class="brand-subtitle">Welcome Back</p>
+        </div>
+
+        <div class="input-group">
+            <label>Email Address <span class="required">*</span></label>
+            <!-- FIXED: Changed name attribute from "username" to "email" to match views.py -->
+            <input type="email" name="email" required autocomplete="username">
+        </div>
+
+        <div class="input-group">
+            <div class="label-wrapper">
+                <label>Password <span class="required">*</span></label>
+                <a href="#forgot" class="forgot-password-link">Forgot?</a>
+            </div>
+            <!-- FIXED: Added missing name="password" attribute to match views.py -->
+            <input type="password" name="password" required autocomplete="current-password">
+        </div>
+
+        <button class="submit-btn" type="submit">
+            Login
+        </button>
+
+        <p class="registration-redirect">
+            Don't have an account?<a href="{% url 'register' %}">Sign Up</a>
+        </p>
+
+    </form>
+</div>
+
+</body>
+</html>

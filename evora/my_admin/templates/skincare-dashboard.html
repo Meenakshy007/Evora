@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVORA - Skincare Dashboard</title>
+    <style>
+        :root {
+            --bg-dark: #0d0f10;
+            --panel-dark: #121517;
+            --border-color: #222629;
+            --text-primary: #ffffff;
+            --text-muted: #8a8f93;
+            --accent-gold: #c3a475;
+            --card-hover: #181c1f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Serif Accent Typography */
+        h1, h2, .serif-text {
+            font-family: "Playfair Display", "Georgia", serif;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- SIDEBAR LAYOUT --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-dark);
+            border-right: 1px solid var(--border-color);
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--accent-gold);
+        }
+
+        .nav-item.active {
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            color: #444;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- MAIN CONTENT LAYOUT --- */
+        .main-container {
+            flex-grow: 1;
+            padding: 60px 80px;
+            max-width: 1100px;
+        }
+
+        .section-container {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 1.65rem;
+            color: var(--accent-gold);
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        /* --- SECTION 1: SKIN TYPE CARDS --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            background-color: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 32px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card:hover {
+            background-color: var(--card-hover);
+            border-color: var(--text-muted);
+        }
+
+        .card.active {
+            border-color: var(--accent-gold);
+            box-shadow: inset 0 0 0 1px var(--accent-gold);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            height: 24px;
+            opacity: 0.85;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .card-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* --- SECTION 2: CONCERNS DROPDOWNS --- */
+        .dropdowns-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px 32px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .custom-select {
+            background-color: var(--panel-dark);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            width: 100%;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a8f93' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+        }
+
+        .custom-select:focus {
+            border-color: var(--accent-gold);
+        }
+
+        /* --- CALL TO ACTION BUTTON --- */
+        .action-container {
+            margin-top: 40px;
+        }
+
+        .btn-submit {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 14px 36px;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <nav class="nav-links">
+                <a href="#skin-profile" class="nav-item active">Skin Profile</a>
+            </nav>
+        </div>
+        <div class="sidebar-footer">
+            &copy; 2026 EVORA Luxury Ltd.
+        </div>
+    </aside>
+
+    <main class="main-container">
+        <form id="skincare-profile-form" method="GET" action="/skincare-products/">
+
+            <input type="hidden" id="skin-type-tracker" name="skin_type" value="sensitive">
+
+            <section class="section-container">
+                <h2 class="section-title">1. Identify Your Skin Type</h2>
+                <div class="cards-grid">
+
+                    <div class="card active" data-type="sensitive" onclick="selectCard(this)">
+                        <div class="card-icon">🛡️</div>
+                        <div class="card-title">Sensitive</div>
+                        <div class="card-desc">Prone to redness, itching, or irritation.</div>
+                    </div>
+
+                    <div class="card" data-type="oily" onclick="selectCard(this)">
+                        <div class="card-icon">💧</div>
+                        <div class="card-title">Oily</div>
+                        <div class="card-desc">Excess sebum production & prominent pores.</div>
+                    </div>
+
+                    <div class="card" data-type="dry" onclick="selectCard(this)">
+                        <div class="card-icon">🍂</div>
+                        <div class="card-title">Dry</div>
+                        <div class="card-desc">Tightness, flaking, or a dull complexion.</div>
+                    </div>
+
+                    <div class="card" data-type="combo" onclick="selectCard(this)">
+                        <div class="card-icon">☯️</div>
+                        <div class="card-title">Combo</div>
+                        <div class="card-desc">Oily T-zone paired with dry or normal cheeks.</div>
+                    </div>
+
+                    <div class="card" data-type="normal" onclick="selectCard(this)">
+                        <div class="card-icon">✨</div>
+                        <div class="card-title">Normal</div>
+                        <div class="card-desc">Well-balanced moisture and clear clarity.</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="section-container">
+                <h2 class="section-title">2. Texture & Target Concerns</h2>
+                <div class="dropdowns-grid">
+
+                    <div class="form-group">
+                        <label class="form-label" for="primary-concern">Primary Concern</label>
+                        <select id="primary-concern" name="primary_concern" class="custom-select">
+                            <option value="">Select primary focus...</option>
+                            <option value="acne">Acne / Pimples</option>
+                            <option value="pigmentation">Pigmentation</option>
+                            <option value="fine-lines">Fine Lines</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="secondary-concern">Secondary Concern</label>
+                        <select id="secondary-concern" name="secondary_concern" class="custom-select">
+                            <option value="">Select secondary focus...</option>
+                            <option value="under-eye">Under Eye Circles</option>
+                            <option value="dullness">Dull Skin</option>
+                        </select>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="action-container">
+                <button type="submit" class="btn-submit">Generate My Custom Ritual</button>
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        // Interactive card selection helper linked directly with hidden query parameter tracker
+        function selectCard(selectedElement) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => card.classList.remove('active'));
+            selectedElement.classList.add('active');
+
+            // Sync the active card identity string context safely to your form input field
+            const skinType = selectedElement.getAttribute('data-type');
+            document.getElementById('skin-type-tracker').value = skinType;
+        }
+    </script>
+</body>
+</html>

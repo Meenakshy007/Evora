@@ -1,0 +1,1 @@
+DELETE FROM my_admin_haircareproducts;

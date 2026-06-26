@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVORA - Your Custom Ritual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #0d0f10;               /* Master Dark background Canvas */
+            --panel: #121517;           /* Sleek Container Cards */
+            --border: #222629;          /* Thin structural borders */
+            --gold: #c3a475;            /* Luxury brand accent gold */
+            --text: #ffffff;            /* Crisp primary typography text */
+            --muted: #8a8f93;           /* Subdued gray for structural metadata */
+            --badge-bg: rgba(195, 164, 117, 0.12);
+            --badge-border: rgba(195, 164, 117, 0.25);
+            --secondary-badge-bg: rgba(107, 179, 186, 0.12);
+            --secondary-badge-border: rgba(107, 179, 186, 0.25);
+            --hair-accent: #6bb3ba;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* --- MASTER LAYOUT HEADER --- */
+        .hero-banner {
+            max-width: 1100px;
+            margin: 50px auto 40px;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .hero-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: var(--gold);
+            letter-spacing: 0.03em;
+            margin-bottom: 8px;
+        }
+
+        .hero-banner p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        /* --- HORIZONTAL USER TARGET CONCERN CHIPS --- */
+        .user-preferences {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .pref-chip {
+            background: #181c1f;
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            letter-spacing: 0.02em;
+            color: #e0e0e0;
+        }
+
+        .pref-chip strong {
+            color: var(--gold);
+            font-weight: 500;
+            margin-left: 4px;
+        }
+
+        /* --- MAIN WORKSPACE WORK CONTAINER --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- CATEGORY TIMELINE STEP SECTIONS --- */
+        .category-section {
+            margin-bottom: 45px;
+        }
+
+        .category-title {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-title span {
+            color: var(--muted);
+            font-weight: 400;
+            margin-right: 4px;
+        }
+
+        /* --- TWO-COLUMN STYLED STEP ROW GRID --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- PREMIUM LUXURY CARD PANELS --- */
+        .product-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: border-color 0.2s ease;
+        }
+
+        .product-card:hover {
+            border-color: rgba(195, 164, 117, 0.3);
+        }
+
+        .product-header-block {
+            margin-bottom: 20px;
+        }
+
+        .product-name {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        /* --- CARD META LABELS & BADGES --- */
+        .badge-cluster {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .meta-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-primary {
+            background: var(--badge-bg);
+            color: var(--gold);
+            border: 1px solid var(--badge-border);
+        }
+
+        .badge-secondary {
+            background: var(--secondary-badge-bg);
+            color: var(--hair-accent);
+            border: 1px solid var(--secondary-badge-border);
+        }
+
+        .type-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .type-label span {
+            color: #b3b3b3;
+            margin-left: 2px;
+        }
+
+        /* --- VIEW FORMULA ACTION ACTION BUTTON --- */
+        .action-link-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 16px;
+            margin-top: auto;
+        }
+
+        .action-btn {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: opacity 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* --- STYLED SYSTEM TIMELINE LABELS (AM/PM Equivalent) --- */
+        .schedule-tag {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #66cf91;
+            background: rgba(102, 207, 145, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(102, 207, 145, 0.2);
+        }
+
+        /* --- CLEAN SLICK PLACER ENGINES FOR EMPTY CONFIGS --- */
+        .empty-notice {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px dashed var(--border);
+            padding: 24px;
+            text-align: center;
+            color: var(--muted);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-banner">
+        <h1>Your Personalized Multi-Step Routine</h1>
+        <p>Complete dashboard rendering matching your loaded profile collections</p>
+
+        <div class="user-preferences">
+            <div class="pref-chip">Profile Matrix: <strong>{{ pattern|title }} Hair</strong></div>
+            <div class="pref-chip">Primary Target: <strong>{{ thickness|title }}</strong></div>
+            <div class="pref-chip">Secondary Target: <strong>{{ scalp|title }} Scalp</strong></div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        {% for category, product_list in grouped_products.items %}
+        <div class="category-section">
+
+            <h2 class="category-title">
+                <span>
+                    {% if category == "Shampoo" %}01
+                    {% elif category == "Conditioner" %}02
+                    {% elif category == "Serum" %}03
+                    {% else %}04{% endif %}
+                </span>
+                {{ category }}s
+            </h2>
+
+            <div class="products-grid">
+                {% for product in product_list %}
+                    <div class="product-card">
+
+                        <span class="schedule-tag">Active Routine</span>
+
+                        <div class="product-header-block">
+                            <h3 class="product-name">{{ product.name }}</h3>
+
+                            <div class="badge-cluster">
+                                <span class="meta-badge badge-primary">{{ product.hair_type|upper }}</span>
+                                <span class="meta-badge badge-secondary">{{ product.scalp_condition|upper }}</span>
+                            </div>
+
+                            <div class="type-label">Type: <span>{{ product.hair_pattern|title }}</span></div>
+                        </div>
+
+                        <div class="action-link-wrapper">
+                            <a href="{{ product.product_link }}" target="_blank" class="action-btn">
+                                View Formula <i class="fa-solid fa-arrow-right" style="font-size: 0.7rem;"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                {% empty %}
+                    <div class="empty-notice">
+                        No customized recommended {{ category|lower }} formulation targets verified for this biological configuration matrix profiles.
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </main>
+
+</body>
+</html>

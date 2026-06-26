@@ -1,0 +1,220 @@
+/* Core Layout Reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0d1412;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden; /* Strips default browser margins and forces full-screen view lock */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.hero-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   SLIDESHOW GALLERY CORE STYLING
+   ========================================================================== */
+.slideshow-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Multi-tonal ambient color mask layer for deep contrast and text pop */
+.slideshow-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Enhanced Contrast Gradient: Deepens the center explicitly behind the typography */
+    background: radial-gradient(
+        circle,
+        rgba(10, 14, 12, 0.65) 0%,   /* Darker center shield directly behind text */
+        rgba(13, 24, 21, 0.5) 40%,    /* Soft transition over your colorful images */
+        rgba(10, 14, 22, 0.85) 100%   /* Deep cinematic outer framing edges */
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.06); /* Fluid cinema-zoom scale entry */
+    transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), transform 1.9s ease-out;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+}
+
+.slide-img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Forces the images to span corner-to-corner without distorting */
+    object-position: center;
+    display: block; /* Eliminates hidden inline spacing gaps */
+}
+
+/* ==========================================================================
+   OVERLAY & TYPOGRAPHY STYLING
+   ========================================================================== */
+.center-content-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    padding: 0 20px;
+}
+
+.brand-showcase {
+    text-align: center;
+    max-width: 800px;
+    animation: luxuryContentEntrance 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6.5rem;
+    font-weight: 300;
+    letter-spacing: 14px;
+    color: #e5c1b3; /* Soft Metallic Rose Gold */
+    line-height: 1;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    /* Added multi-layered crisp shadow to keep it visible on all light/dark images */
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.brand-tagline {
+    font-size: 1.15rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    color: #a3b8b0; /* Fresh Muted Sage Accent */
+    line-height: 1.4;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    /* Clean text shadow layer */
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* ==========================================================================
+   ACTION EXECUTION BUTTON
+   ========================================================================== */
+.register-action-btn {
+    background-color: transparent;
+    border: 1px solid #e5c1b3;
+    padding: 15px 52px;
+    color: #e5c1b3;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+}
+
+.register-action-btn:hover {
+    background-color: #e5c1b3;
+    color: #0d1412;
+    box-shadow: 0 12px 35px rgba(229, 193, 179, 0.3);
+}
+
+.register-action-btn:active {
+    transform: scale(0.97);
+}
+
+/* ==========================================================================
+   AUTOMATIC PROGRESS DOT INDICATORS
+   ========================================================================== */
+.slideshow-indicators {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 14px;
+    z-index: 4;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.25);
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+.dot.active {
+    background-color: #e5c1b3; /* Highlight active progress dot in Rose Gold */
+    transform: scale(1.4);
+}
+
+/* ==========================================================================
+   ENTRANCE TRANSITIONS & RESPONSIVE SCALING
+   ========================================================================== */
+@keyframes luxuryContentEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-title {
+        font-size: 3.8rem;
+        letter-spacing: 6px;
+        margin-bottom: 16px;
+    }
+    .brand-tagline {
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        margin-bottom: 35px;
+    }
+    .register-action-btn {
+        padding: 12px 36px;
+        font-size: 0.75rem;
+    }
+    .slideshow-indicators {
+        bottom: 30px;
+        gap: 10px;
+    }
+}
+
+/* ==========================================================================
+   LOGIN FOOTER LINK STYLING
+   ========================================================================== */
+
