@@ -119,3 +119,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'my_admin' / 'static',
 ]
+
+STATIC_URL = 'static/'
+
+# Add this exact line right below STATIC_URL:
+STATIC_ROOT = BASE_DIR / 'staticfiles'
